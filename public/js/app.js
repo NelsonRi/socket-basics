@@ -8,7 +8,7 @@ socket.on('message', function (message) {
 	console.log('New Message:');
 	console.log(message.text);
 
-	$('.messages').append('<p>'+ message.text +'</p>')
+	$('.messages').append('<p>'+ message.text + '</p>')
 });
 
 
