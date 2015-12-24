@@ -1,5 +1,5 @@
 var socket = io();
-var name = getQVar('name');
+var name = getQVar('name') || 'Anonymous';
 var room = getQVar('room');
 
 console.log(name + ' wants to join ' + room);
@@ -17,10 +17,14 @@ socket.on('welcome', function (welcome) {
 
 socket.on('message', function (message) {
 	var momentTimeStamp = moment.utc(message.timeStamp);
+	var $message = jQuery('.messages');
+
 	console.log('New Message:');
 	console.log(message.text);
 
-	$('.messages').append('<p><strong>' + momentTimeStamp.local().format('h:mm a') + ': </strong>' + message.text + '</p>')
+	$message.append('<p><strong>' + message.name + ' ' +momentTimeStamp.local().format('h:mm a') + '</strong></p>');
+	$message.append('<p>' + message.text + '</p>');
+
 });
 
 var $form = jQuery('#message-form');
@@ -31,6 +35,7 @@ $form.on('submit', function (event) {
 	var $message = $form.find('input[name=message]');
 
 	socket.emit('message', {
+		name: name,
 		text: $message.val()
 	});
 

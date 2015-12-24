@@ -22,6 +22,12 @@ io.on('connection', function (socket) {
 		text: 'Welcome to the Chat Application!',
 		timeStamp: now.valueOf()
 	});
+
+	socket.emit('message', {
+		name: 'System',
+		text: '',
+		timeStamp: now.valueOf()
+	});
 });
 
 http.listen(PORT, function () {
