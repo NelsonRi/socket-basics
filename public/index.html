@@ -3,14 +3,32 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Socket.io Basics</title>
+		<style>
+		input {
+			margin: 10px 0;
+			display: block;
+		}
+
+		form label {
+			font-size: 1.5em;
+			font-weight: bold;
+		}
+
+		input[type="submit"] {
+			border-radius: 5%;
+		}
+
+		</style>
 	</head>
 	<body>
 		<h1>Join Chat</h1>
 
 		<form action="/chat.html">
-			<label for="">Display Name</label>
+			<label for="name">Your Name</label>
 			<input type="text" name="name" />
-			<input type="submit" value="Join Chat">
+			<label for="room">Chat Room</label>
+			<input type="text" name="room" />
+			<input type="submit" value="Join Chat" />
 		</form>
 	</body>
 </html>

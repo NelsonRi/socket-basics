@@ -4,6 +4,9 @@ var room = getQVar('room');
 
 console.log(name + ' wants to join ' + room);
 
+var $roomTitle = jQuery('#room-title');
+$roomTitle.text(room);
+
 socket.on('connect', function () {
 	console.log('Connected to Socket.IO Server');
 });
