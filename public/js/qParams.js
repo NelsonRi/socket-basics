@@ -4,7 +4,7 @@ function getQVar(argv) {
 	for (var idx = 0; idx < string.length; idx++) {
 		var kv = string[idx].split('=');
 		if (decodeURIComponent(kv[0]) == argv) {
-			return decodeURIComponent(kv[1]);
+			return decodeURIComponent(kv[1].replace(/\+/g, ' '));
 		}
 	}
 
