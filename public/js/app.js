@@ -9,6 +9,10 @@ $roomTitle.text(room);
 
 socket.on('connect', function () {
 	console.log('Connected to Socket.IO Server');
+	socket.emit('joinRoom', {
+		name: name,
+		room: room
+	});
 });
 
 socket.on('welcome', function (welcome) {

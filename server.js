@@ -8,14 +8,28 @@ var now = moment();
 
 app.use(express.static(__dirname + '/public'));
 
+var clientInfo = {
+
+};
+
 io.on('connection', function (socket) {
 	console.log('User Connected via Socket.IO!');
+
+	socket.on('joinRoom', function (req) {
+		clientInfo[socket.id] = req;
+		socket.join(req.room);
+		socket.broadcast.to(req.room).emit('message', {
+			name: 'System',
+			text: req.name + ' has joined!',
+			timeStamp: now.valueOf()
+		});
+	});
 
 	socket.on('message', function (message) {
 		console.log('Message Received: ' + now.local().format('h:mm:ss a') +' '+ message.text);
 
 		message.timeStamp = now.valueOf();
-		io.emit('message', message);
+		io.to(clientInfo[socket.id].room).emit('message', message);
 	});
 
 	socket.emit('welcome', {
